@@ -122,7 +122,7 @@ Plot_box_y <-ggplot(df_iris,aes(Species,Petal.Length))+geom_boxplot(aes(fill = S
         axis.title.y = element_blank())
 Plot_box_x <-ggplot(df_iris,aes(Sepal.Width,Species))+geom_boxplot(aes(fill = Species))+
   theme(legend.position =  "none",
-        axis.title.y = element_blank())
+        axis.title.x = element_blank())
 ## geom_tile gives a nicer legend to extract
 Plot_legend <- ggplot(df_iris,aes(Sepal.Width, Petal.Length))+geom_tile(aes(fill = Species))
 

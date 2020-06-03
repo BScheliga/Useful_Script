@@ -46,16 +46,6 @@ df_1 <- read.csv("meaningful data.csv") # in " " is the name of the file
 
 iris  # this data set is one of integrated data set in R
 
-##### setting up your work directory ####
-setwd("H:/R-scripts/workshop")
-dir()    # shows all files in the folder
-
-df_1 <- read.csv("meaningful data.csv")
-
-###### working with data ####
-
-iris  # this data set is one of integrated data set in R
-
 ## storing the data in an Object
 df_iris <- iris
 
@@ -115,7 +105,6 @@ ggplot(df_iris,aes(Sepal.Width, Petal.Length))+geom_point(aes(colour = Species))
 
 ### box plots
 
-
 ggplot(df_iris,aes(Species,Sepal.Width))+geom_boxplot()
 
 ggplot(df_iris,aes(Species,Petal.Width))+geom_boxplot()
@@ -130,11 +119,9 @@ Plot_scatter <- ggplot(df_iris,aes(Sepal.Width, Petal.Length))+geom_point(aes(co
 
 Plot_box_y <-ggplot(df_iris,aes(Species,Petal.Length))+geom_boxplot(aes(fill = Species))+
   theme(legend.position =  "none",
-        axis.title.x = element_blank(),
         axis.title.y = element_blank())
 Plot_box_x <-ggplot(df_iris,aes(Sepal.Width,Species))+geom_boxplot(aes(fill = Species))+
   theme(legend.position =  "none",
-        axis.title.x = element_blank(),
         axis.title.y = element_blank())
 ## geom_tile gives a nicer legend to extract
 Plot_legend <- ggplot(df_iris,aes(Sepal.Width, Petal.Length))+geom_tile(aes(fill = Species))

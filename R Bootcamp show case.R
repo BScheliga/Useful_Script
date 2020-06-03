@@ -35,7 +35,7 @@ var2 <- 6
 
 var1 + var2
 
-<<<<<<< HEAD
+
 ##### How to set up your local work directory ####
 setwd("H:/R-scripts/workshop")
 dir()    # shows all files in the folder
@@ -45,7 +45,7 @@ df_1 <- read.csv("meaningful data.csv") # in " " is the name of the file
 ###### working with data ####
 
 iris  # this data set is one of integrated data set in R
-=======
+
 ##### setting up your work directory ####
 setwd("H:/R-scripts/workshop")
 dir()    # shows all files in the folder
@@ -55,7 +55,6 @@ df_1 <- read.csv("meaningful data.csv")
 ###### working with data ####
 
 iris  # this data set is one of integrated dataset in R
->>>>>>> b04421744f8240a3ffded5cb12cfd717061a1dd2
 
 ## storing the data in an Object
 df_iris <- iris

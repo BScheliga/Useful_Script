@@ -54,7 +54,7 @@ df_1 <- read.csv("meaningful data.csv")
 
 ###### working with data ####
 
-iris  # this data set is one of integrated dataset in R
+iris  # this data set is one of integrated data set in R
 
 ## storing the data in an Object
 df_iris <- iris
@@ -165,8 +165,8 @@ D <- Plot_legend
 gA <- ggplotGrob(A)
 gB <- ggplotGrob(B)
 gC <- ggplotGrob(C)
-gD <- Plot_legend
-#gD <- ggplotGrob(D)
+gD <- Plot_legend # already a Grob
+
 ##########################
 ### get dimensions from the plots
 
@@ -183,10 +183,8 @@ gB$height <- as.list(maxHeight)
 #https://cran.r-project.org/web/packages/gridExtra/vignettes/arrangeGrob.html
 gs <- gList(gA, gB, gC, gD)
 
-### the plot layout for 5 by 2 martix
+### the plot layout for 5 by 2 matrix
 lay <- rbind(c(2,1),
              c(4,3))
 
-#### awesome version
-#### name Spring_2H 950*900
 grid.arrange(grobs = gs, layout_matrix = lay)

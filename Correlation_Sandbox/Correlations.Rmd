@@ -1,0 +1,70 @@
+---
+title: "Correlation  tryouts"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(tidyverse)
+#library(ellipse)
+#library(psych)
+#library(corrr)
+library(knitr)
+library(corrplot)
+library(qgraph)
+#library(visNetwork)
+```
+
+
+```{r root.dir = "~/Correlation_Sandbox", include=FALSE }
+# loading data
+#setwd()
+dir()
+df_Scot_VulRE<-read.csv("Scotland_Vulnerability_Resource_v0.2.csv")
+
+df_death_covid_S8<-read.csv("Covid_deaths_extra_tables_week_24_Table_S8.csv")# table 8 is interesting
+# Table S8: Numbers and crude rates1 of deaths involving COVID-19, by Intermediate Zone, March, April and May 2020
+#https://www.nrscotland.gov.uk/files//statistics/covid19/covid-deaths-extra-tables-week-24.zip
+
+# The Column header are pretty long. We will replace them with numbers and store them in a new table
+df_name <- data.frame(New_Name = paste("C_",seq(1:30),sep=""), Old_Name = colnames(df_Scot_VulRE)[c(6:8,10,12:33,35,38,39,51)])
+colnames(df_Scot_VulRE)[c(6:8,10,12:33,35,38,39,51)] <- paste("C_",seq(1:30),sep="")
+
+# selecting only the Data zones and omitting the postcode rows
+Res_cor <- df_Scot_VulRE[,c(6:8,10,12:33,35,38,39,51)] %>% distinct() %>% cor(use = "complete.obs")#only numeric or integer and only complete observation. this will removed the rows with NA
+
+
+```
+
+Column {.tabset .tabset-fade}
+-----------------------------------------------------------------------
+
+### Correlation martix
+
+```{r}
+## lets draw a heat map
+#Res_cor %>% heatmap()
+
+Res_cor %>% corrplot(method="pie", type = "upper")
+
+```
+
+
+-----------------------------------------------------------------------
+
+### Network Analysis
+
+```{r}
+Res_cor %>% qgraph(shape = "circle", posCol = "darkgreen", negCol="darkred", layout = "spring")
+
+```
+
+Column {data-width=100}
+-----------------------------------------------------------------------
+
+```{r}
+df_name %>% kable()
+```

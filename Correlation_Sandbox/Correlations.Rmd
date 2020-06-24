@@ -1,5 +1,9 @@
 ---
+<<<<<<< HEAD
 title: "Correlation  tryouts"
+=======
+title: "Correlatio  tryouts"
+>>>>>>> f2fe841a59edc339ff5940737714a423e231e289
 output: 
   flexdashboard::flex_dashboard:
     orientation: columns
@@ -8,6 +12,7 @@ output:
 
 ```{r setup, include=FALSE}
 library(flexdashboard)
+<<<<<<< HEAD
 library(tidyverse)
 #library(ellipse)
 #library(psych)
@@ -68,3 +73,38 @@ Column {data-width=100}
 ```{r}
 df_name %>% kable()
 ```
+=======
+```
+
+
+```{r}
+# loading data
+
+df_SCot_VulRE<-read.csv()
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Chart A
+
+```{r}
+
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Chart B
+
+```{r}
+
+```
+
+### Chart C
+
+```{r}
+
+```
+
+>>>>>>> f2fe841a59edc339ff5940737714a423e231e289

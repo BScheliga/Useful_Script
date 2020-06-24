@@ -39,9 +39,14 @@ var1 + var2
 ##### How to set up your local work directory ####
 setwd("H:/R-scripts/workshop")
 dir()    # shows all files in the folder
+dir(pattern= ".csv")
+
+df_filename <-dir(pattern= ".csv")
+
+df_filename[1]
 ## load the local files
 df_1 <- read.csv("meaningful data.csv") # in " " is the name of the file
-
+df_1 <- read.csv(df_filename[1])
 ###### working with data ####
 
 iris  # this data set is one of integrated data set in R
@@ -55,11 +60,15 @@ summary(df_iris)
 
 # for single columns
 mean(df_iris$Sepal.Length)
+mean(df_iris$Sepal.Length)
 mean(df_iris[,1]) #
+
+df_iris[c(2,4,5),1]
+
 
 max(df_iris$Sepal.Length)
 
-min(df_iris$Sepal.Length) 
+min(df_iris[c(2,4,5),1]) 
 
 ### statistical tests
 ## t test
@@ -67,6 +76,8 @@ t.test(df_iris$Sepal.Length)
 
 ## correlation 
 cor.test(df_iris$Sepal.Length, df_iris$Sepal.Width)
+
+
 
 #### visualizing the data #####
 

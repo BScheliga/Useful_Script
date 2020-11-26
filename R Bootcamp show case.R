@@ -20,7 +20,7 @@ log(1)              # logarithm to base e
 
 log10(1)            # logarithm to base 10
 
-exp(1)              # natural antilog
+exp(1)              # natural anti log
 
 sqrt(4)             # square root
 
@@ -43,10 +43,17 @@ dir(pattern= ".csv")
 
 df_filename <-dir(pattern= ".csv")
 
+df_filename
 df_filename[1]
+df_filename[2]
 ## load the local files
+
+
 df_1 <- read.csv("meaningful data.csv") # in " " is the name of the file
 df_1 <- read.csv(df_filename[1])
+
+
+
 ###### working with data ####
 
 iris  # this data set is one of integrated data set in R
@@ -60,8 +67,10 @@ summary(df_iris)
 
 # for single columns
 mean(df_iris$Sepal.Length)
-mean(df_iris$Sepal.Length)
-mean(df_iris[,1]) #
+mean(df_iris[,1]) 
+
+mean(df_iris$Sepal.Width)
+
 
 df_iris[c(2,4,5),1]
 
@@ -93,17 +102,7 @@ plot(df_iris)
 library(psych)
 
 pairs.panels(df_iris[,c(1:4)], scale=TRUE)
-pairs.panels(df_iris[,c(1:4)], scale=TRUE)
 
-library(corrr)
-library(dplyr)
-library(lsr)
-
-df_iris[,c(1:4)] %>% correlate() %>% network_plot(min_cor = 0.1)
-
-pairs.panels(df_iris[,c(1:4)], scale=TRUE)
-
-library(ggplot2)
 
 ### scatter plots
 ggplot(df_iris,aes(Sepal.Width, Petal.Length))+geom_point()

@@ -37,7 +37,7 @@ var1 + var2
 
 
 ##### How to set up your local work directory ####
-setwd("H:/R-scripts/workshop")
+setwd("C:/brave new world/workshop")
 dir()    # shows all files in the folder
 dir(pattern= ".csv")
 

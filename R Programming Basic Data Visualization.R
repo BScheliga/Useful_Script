@@ -10,6 +10,14 @@ library(tidyverse)
 df_cars <- mtcars
 
 
+head(df_cars)
+
+
+
+## Basic ggplot syntax
+
+ggplot(aes(rownames()))
+
 ## ideas 
 ## ggthemes
 ## global variable and local adding

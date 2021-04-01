@@ -9,6 +9,8 @@
 ### some of the following example are from https://intro2r.com/getting-started.html
 ### which is a superb introduction guide!
 
+(((())))
+
 
 2+2
 
@@ -27,6 +29,7 @@ sqrt(4)             # square root
 4^2                   # 4 to the power of 2
 
 pi                    # not a function but useful
+
 
 ##### Objects ####
 
@@ -52,7 +55,7 @@ df_filename[2]
 df_1 <- read.csv("meaningful data.csv") # in " " is the name of the file
 df_1 <- read.csv(df_filename[1])
 
-
+rm(df_1) # removing an object
 
 ###### working with data ####
 
@@ -61,18 +64,20 @@ iris  # this data set is one of integrated data set in R
 ## storing the data in an Object
 df_iris <- iris
 
+head(df_iris) # get the first 6 rows of the data set
+
 ## general stats
 # for the whole data set
 summary(df_iris)
 
 # for single columns
-mean(df_iris$Sepal.Length)
-mean(df_iris[,1]) 
+mean(df_iris$Sepal.Length) # best practice
+mean(df_iris[,1]) # bad practice
 
-mean(df_iris$Sepal.Width)
+mean(df_iris$Sepal.Width)  
 
 
-df_iris[c(2,4,5),1]
+df_iris[c(2,4,5),1]  # picking row 2,4 & 5 from the 1 first column
 
 
 max(df_iris$Sepal.Length)
@@ -104,6 +109,7 @@ library(psych)
 pairs.panels(df_iris[,c(1:4)], scale=TRUE)
 
 
+library(ggplot2)
 ### scatter plots
 ggplot(df_iris,aes(Sepal.Width, Petal.Length))+geom_point()
 

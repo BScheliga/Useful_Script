@@ -253,3 +253,19 @@ p
 # Change the x axis name
 p + scale_x_discrete(name ="Dose (mg)", 
                      limits=c("2","1","0.5"))
+
+##### Dual axis Plot
+# run code from dual_axis_plot.R
+
+p1 <- ggplot(df_cars, aes(cyl,mpg))+geom_boxplot(aes(group=cyl), fill="blue", alpha=0.5)+ggtitle("Primary Plot")
+p2 <- ggplot(df_cars, aes(cyl,hp))+geom_boxplot(aes(group=cyl), fill="green", alpha=0.5)+ggtitle("Secondary Plot")
+
+
+library(grid)
+library(gtable)
+ggplot_dual_axis_fixed.margin(p1,p2,"y")
+
+
+
+### Legends
+# https://www.r-graph-gallery.com/239-custom-layout-legend-ggplot2.html

@@ -6,6 +6,9 @@
 
 ### for creating a heading / jumping point in your script  #####
 
+
+# Shows
+
 ### some of the following example are from https://intro2r.com/getting-started.html
 ### which is a superb introduction guide!
 
@@ -38,6 +41,10 @@ var2 <- 6
 
 var1 + var2
 
+var3 <- c(1,2,3,4)
+
+var4 <- seq(1,4,4) # seq(from,to, by)
+var5 <- seq(from = 1, to = 4, by= .1)
 
 ##### How to set up your local work directory ####
 setwd("C:/brave new world/workshop")
@@ -66,13 +73,18 @@ df_iris <- iris
 
 head(df_iris) # get the first 6 rows of the data set
 
+tail(df_iris) # # get the last 6 rows of the data set
+
+## show auto-correct
+
+
 ## general stats
 # for the whole data set
 summary(df_iris)
 
 # for single columns
 mean(df_iris$Sepal.Length) # best practice
-mean(df_iris[,1]) # bad practice
+mean(df_iris[,1]) # bad practice 
 
 mean(df_iris$Sepal.Width)  
 

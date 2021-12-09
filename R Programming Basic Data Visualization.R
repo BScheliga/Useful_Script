@@ -1,9 +1,9 @@
 ###  Basic Data Visualization using ggplot2
 ### Author: Bernhard Scheliga
-### Date: 17/12/2020
+### Date: 09/12/2021
 
 
-### all material linked below was accessed: 17/12/2020
+### all material linked below was accessed: 09/12/2021
 
 
 ### loading ggplot2 directly
@@ -14,7 +14,7 @@ library(tidyverse)
 
 ### loading data set
 df_cars <- mtcars
-
+ head(df_cars)
 
 ##### Basic ggplot syntax
 #### Declaring or defining which data is used
@@ -24,7 +24,7 @@ df_cars <- mtcars
 ### Option 1
 ggplot(df_cars)+geom_point(aes(cyl,mpg))# Data set defined "globally", Variable defined "locally"
 ### Option 2
-ggplot(df_cars, aes(cyl,mpg))+geom_point() +ggtitle("Option 2")# Data set and variables defined "globally" 
+ggplot(df_cars, aes(cyl,mpg)) + geom_point() + ggtitle("Option 2")# Data set and variables defined "globally" 
 
 ### Option 3
 ggplot() + geom_point(aes(cyl,mpg),df_cars) +ggtitle("Option 3")# Data set and variables defined "locally"
@@ -37,6 +37,7 @@ ggplot() + geom_point(aes(cyl,mpg),df_cars) +ggtitle("Option 3")# Data set and v
 ## Option 1 Data set global & Var local
 
 ### Scatterplot
+
 # link: https://ggplot2.tidyverse.org/reference/geom_point.html
 
 ## Option 1 Data set global & Var local
@@ -50,7 +51,9 @@ ggplot(df_cars, aes(cyl,mpg))+geom_point() +ggtitle("Option 2")
 # link: http://www.sthda.com/english/wiki/ggplot2-box-plot-quick-start-guide-r-software-and-data-visualization
 
 ## Option 1 Data set global & Var local
-ggplot(df_cars)+geom_boxplot(aes(cyl,mpg))+ggtitle("Option 1")# Note ggplot does not know, you want cylinders seperate
+ggplot(df_cars)+geom_boxplot(aes(cyl,mpg))+ggtitle("Option 1")
+## Note ggplot does not know, you want cylinders separate
+
 # use either group
 ggplot(df_cars)+geom_boxplot(aes(cyl,mpg, group=cyl))+ggtitle("Option 1")
 # or define cyl as factor
@@ -58,9 +61,20 @@ ggplot(df_cars)+geom_boxplot(aes(as.factor(cyl),mpg))+ggtitle("Option 1")
 
 
 ## Option 2: Data set & Var global
-ggplot(df_cars, aes(cyl,mpg))+geom_boxplot()+ggtitle("Option 2")
-ggplot(df_cars, aes(cyl,hp))+geom_boxplot(aes(group=cyl))+ggtitle("Option 2")
+ggplot(df_cars, aes(cyl,mpg))+geom_boxplot()+ggtitle("Option 2 - No Group")
+ggplot(df_cars, aes(cyl,hp))+geom_boxplot(aes(group=cyl))+ggtitle("Option 2 - Group")
 
+# Violin
+ggplot(df_cars, aes(cyl,mpg))+
+  geom_violin(aes(group=cyl))+
+  geom_point()+
+  ggtitle("Option 2 - Violin + point")
+
+# Violin
+ggplot(df_cars, aes(cyl,mpg))+
+  geom_violin(aes(group=cyl))+
+  geom_jitter()+
+  ggtitle("Option 2 - Violin + Jitter")
 
 ## line plot 
 ## Option 1 Data set global & Var local
@@ -69,6 +83,11 @@ ggplot(df_cars)+geom_line(aes(cyl,mpg))+ggtitle("Option 1")
 ggplot(df_cars, aes(cyl,mpg))+geom_line() +ggtitle("Option 2")
 ## if it looks funny, try grouping or as.factor
 ggplot(df_cars, aes(cyl,mpg))+geom_line(aes(group=cyl))+ggtitle("Option 2")
+
+ggplot(df_cars, aes(cyl,mpg))+
+  geom_line(aes(group=cyl))+
+  geom_point()+
+  ggtitle("Option 2")
 
 # plotting order
 #Note: You can save the plot as object in the Global Environment
@@ -87,8 +106,13 @@ ggplot(df_cars, aes(cyl,mpg))+geom_line()+
 ggplot(df_cars, aes(cyl,mpg))+
   geom_boxplot()+
   geom_line()+
-  geom_point(aes(colour="red"))
+  geom_point(aes(colour="blue"))
+# that is not blue
 
+ggplot(df_cars, aes(cyl,mpg))+
+  geom_boxplot()+
+  geom_line()+
+  geom_point(colour="blue")
 
 
 ### aesthetic aes()
@@ -104,7 +128,7 @@ p + geom_point(aes(shape = factor(cyl)))
 p + geom_point(aes(size = qsec))
 
 # Set aesthetics to fixed value
-ggplot(mtcars, aes(wt, mpg)) + geom_point(colour = "lightgreen", size = 3)
+ggplot(mtcars, aes(wt, mpg)) + geom_point(colour = "darkred", size = 3)
 
 
 # Varying alpha (transparency) is useful for large datasets
@@ -128,9 +152,36 @@ p + geom_point(colour = "black", size = 4.5) +
   geom_point(colour = "pink", size = 4) +
   geom_point(aes(shape = factor(cyl)))
 
+# save in a new object
 p2<- p + geom_point(colour = "black", size = 4.5) +
   geom_point(colour = "pink", size = 4) +
   geom_point(aes(shape = factor(cyl)))
+
+# Colour or Fill based on value
+
+set.seed(366) # need to run that before, so we always get the same random numbers
+df_temp <- data.frame(Date = seq.Date(as.Date("2020/01/01"),as.Date("2020/12/31"),by="1 day"), Temp_C = round(runif(366,min= -20,max= 35),2))
+
+# Fill
+ggplot(df_temp)+
+  geom_area(aes(x=Date, y=ifelse(Temp_C<0, Temp_C,0)), fill="darkblue", alpha = 0.7) +
+  geom_area(aes(x=Date, y=ifelse(Temp_C>0, Temp_C, 0)), fill="darkgreen", alpha = 0.7)+
+  geom_hline(yintercept=0, linetype="dashed")+
+  ylab("Daily random Temperatur")+xlab("")+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+  scale_x_date(date_labels = "%b-%Y", date_breaks = "month")+
+  ggtitle("Daily random Temperatur in 2020 - geom_area")
+
+# Colour
+ggplot(df_temp)+
+  geom_line(aes(x=Date, y=ifelse(Temp_C<0, Temp_C,0)), colour="darkblue", alpha = 0.7) +
+  geom_line(aes(x=Date, y=ifelse(Temp_C>0, Temp_C, 0)), colour="darkgreen", alpha = 0.7)+
+  geom_hline(yintercept=0, linetype="dashed")+
+  ylab("Daily random Temperatur")+xlab("")+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+  scale_x_date(date_labels = "%b-%Y", date_breaks = "month")+
+  ggtitle("Daily random Temperatur in 2020 - geom_line")
+
 
 
 
@@ -141,7 +192,7 @@ library(ggthemes)
 
 theme_set(theme_classic())
 # Use theme_set() to completely override the current theme.
-
+p2
 theme_set(theme_bw())
 p2
 theme_set(theme_minimal())
@@ -149,7 +200,7 @@ p2
 theme_set(theme_dark())
 p2
 theme_set(theme_bw())
-
+p2
 
 ##### Making a plot look nice
 # https://ggplot2.tidyverse.org/reference/ggtheme.html
@@ -180,7 +231,7 @@ p1 <- ggplot(mtcars2) +
        y = "Fuel economy (mpg)",
        colour = "Gears")
 
-
+# colour and fill
 
 p1 + facet_grid(vs ~ am)
 

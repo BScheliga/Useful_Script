@@ -64,6 +64,11 @@ df_1 <- read.csv(df_filename[1])
 
 rm(df_1) # removing an object
 
+library(vroom)
+
+df_1 <- vroom("meaningful data.csv")
+
+rm(df_1)
 ###### working with data ####
 
 iris  # this data set is one of integrated data set in R
